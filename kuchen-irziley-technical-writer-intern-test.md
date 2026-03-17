@@ -107,32 +107,32 @@
 **Namespace** — это способ логически разделить ресурсы внутри одного Kubernetes-кластера. Он позволяет организовать приложения и сервисы по проектам, командам или средам (например, development, staging, production). С их помощью разные команды могут работать в одном кластере, не мешая друг другу.
 
 ### Вопрос 4. Объяснение манифеста Kubernetes
-
-```apiVersion: apps/v1```
-```kind: Deployment```
-```metadata:```
-``` name: my-application```
-``` labels:```
-```     app: my-app```
-```spec:```
-``` replicas: 3```
-``` selector:```
-```     matchLabels:```
-```         app: my-app```
-``` template:```
-```     metadata:```
-```         labels:```
-```             app: my-app```
-```spec:```
-``` containers:```
-``` - name: my-container```
-``` image: my-registry/my-app:v1.2.0```
-``` ports:```
-``` - containerPort: 8080```
-``` resources:```
-```     limits:```
-```     memory: "512Mi"```
-```     cpu: "500m"```
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: my-application
+ labels:
+     app: my-app
+spec:
+ replicas: 3
+ selector:
+     matchLabels:
+         app: my-app
+ template:
+     metadata:
+         labels:
+             app: my-app
+spec:
+ containers:
+ - name: my-container
+ image: my-registry/my-app:v1.2.0
+ ports:
+ - containerPort: 8080
+ resources:
+     limits:
+     memory: "512Mi"
+     cpu: "500m"```
 
 Манифест описывает **Deployment**, который запускает контейнерное приложение в Kubernetes.  
 Он определяет, сколько экземпляров приложения должно запускаться и какие ресурсы должен использовать контейнер.
