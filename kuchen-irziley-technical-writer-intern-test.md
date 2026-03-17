@@ -141,39 +141,39 @@ spec:
 
 Ниже приводится объяснение основных разделов.
 
-**apiVersion: apps/v1**  
+`**apiVersion: apps/v1**`  
 Указывает, какая версия API Kubernetes должна использоваться для создания этого ресурса.
 
-**kind: Deployment**  
+`**kind: Deployment**  `
 Определяет тип объекта Kubernetes. В данном случае это Deployment, который управляет группой под (pods), запускающих приложение.
 
-**metadata**  
+`**metadata**`  
 Содержит основную информацию о ресурсе.
 
-- **name: my-application** – имя развертывания.
-- **labels** – теги «ключ-значение», которые помогают Kubernetes идентифицировать и организовывать ресурсы.
+- `**name: my-application**` – имя развертывания.
+- `**labels**` – теги «ключ-значение», которые помогают Kubernetes идентифицировать и организовывать ресурсы.
 
-**spec**  
+`**spec**  `
 Описывает желаемое состояние развертывания.
 
-- **replicas: 3** – Kubernetes должен запустить три экземпляра приложения (три пода).
+- `**replicas: 3**` – Kubernetes должен запустить три экземпляра приложения (три пода).
 
-**selector**  
+`**selector**  `
 Определяет, как развертывание находит под, которыми оно управляет. Оно ищет под с меткой `app: my-app`.
 
-**template**  
+`**template**`  
 Описывает конфигурацию подов, которые будут созданы.
 
-- **metadata.labels** – метки, назначенные поду.
-- **spec** – определяет контейнеры, которые будут запущены внутри пода.
+- `**metadata.labels**` – метки, назначенные поду.
+- `**spec**` – определяет контейнеры, которые будут запущены внутри пода.
 
-**containers**  
+`**containers**  `
 Перечисляет контейнеры, которые будут запущены в каждом поде.
 
-- **name: my-container** – имя контейнера.
-- **image: my-registry/my-app:v1.2.0** – образ контейнера, который будет использоваться для запуска приложения.
+- `**name: my-container**` – имя контейнера.
+- `**image: my-registry/my-app:v1.2.0**` – образ контейнера, который будет использоваться для запуска приложения.
 
-**ports**  
+`**ports** ` 
 Указывает, какой порт контейнера
 
 ### 2.2. Frontend-разработка
@@ -285,27 +285,29 @@ https://cluster.example.com:6443
 
 Чтобы увидеть список доступных пространств имён в кластере, выполните следующую команду:
 
-```kubectl get namespaces```
+`kubectl get namespaces`
 
 Пример вывода:
-```NAME            STATUS AGE```
-```default         Active 365d```
-```kube-node-lease Active 365d```
-```kube-public     Active 365d```
-```kube-system     Active 365d```
-```development     Active 180d```
-```production      Active 180d```
-```staging         Active 180d```
+```
+NAME            STATUS AGE
+default         Active 365d
+kube-node-lease Active 365d
+kube-public     Active 365d
+kube-system     Active 365d
+development     Active 180d
+production      Active 180d
+staging         Active 180d
+```
 
 В столбце `STATUS` отображается, активно ли пространство имён в данный момент.
 
 ### Создание пространства имён
 
 Чтобы создать новое пространство имён, воспользуйтесь следующей командой:
-```kubectl create namespace <namespace-name>```
+`kubectl create namespace <namespace-name>`
 
 Пример:
-```kubectl create namespace testing```
+`kubectl create namespace testing`
 
 После создания пространства имён в него можно развертывать такие ресурсы, как деплойменты, поды и сервисы.
 
@@ -326,16 +328,18 @@ https://cluster.example.com:6443
 Каждое развертывание управляет набором идентичных подов и обеспечивает работу необходимого количества экземпляров.
 
 Чтобы просмотреть развертывания в пространстве имён `development`, выполните команду:
-```kubectl get deployments -n development```
+`kubectl get deployments -n development`
 
 Пример вывода:
 
-```NAME                   READY       UP-TO-DATE      AVAILABLE       AGE```
-```auth-service           2/2         2               2               45d```
-```api-gateway            3/3         3               3               90d```
-```user-service           2/2         2               2               60d```
-```payment-service        1/1         1               1               30d```
-```notification-service   1/1         1               1               15d```
+```
+NAME                   READY       UP-TO-DATE      AVAILABLE       AGE
+auth-service           2/2         2               2               45d
+api-gateway            3/3         3               3               90d
+user-service           2/2         2               2               60d
+payment-service        1/1         1               1               30d
+notification-service   1/1         1               1               15d
+```
 
 ### Обзор развертывания
 
@@ -395,16 +399,18 @@ https://cluster.example.com:6443
 
 Пример вывода:
 
-```NAME                                   READY   STATUS  RESTARTS    AGE```
-```auth-service-5f8d9c7b4d-x7k2m          1/1     Running 0           2d```
-```auth-service-5f8d9c7b4d-p9n3q          1/1     Running 0           2d```
-```api-gateway-6c7b8d9f5c-m4k8p           1/1     Running 0           5d```
-```api-gateway-6c7b8d9f5c-n2w7r           1/1     Running 0           5d```
-```api-gateway-6c7b8d9f5c-q1t5s           1/1     Running 0           5d```
-```user-service-7d8e9f0a6d-k3j6h          1/1     Running 0           1d```
-```user-service-7d8e9f0a6d-l5m9n          1/1     Running 0           1d```
-```payment-service-8e9f0a1b7e-o2p4q       1/1     Running 0           12h```
-```notification-service-9f0a1b2c8f-r3s5t  1/1     Running 0           6h```
+```
+NAME                                   READY   STATUS  RESTARTS    AGE
+auth-service-5f8d9c7b4d-x7k2m          1/1     Running 0           2d
+auth-service-5f8d9c7b4d-p9n3q          1/1     Running 0           2d
+api-gateway-6c7b8d9f5c-m4k8p           1/1     Running 0           5d
+api-gateway-6c7b8d9f5c-n2w7r           1/1     Running 0           5d
+api-gateway-6c7b8d9f5c-q1t5s           1/1     Running 0           5d
+user-service-7d8e9f0a6d-k3j6h          1/1     Running 0           1d
+user-service-7d8e9f0a6d-l5m9n          1/1     Running 0           1d
+payment-service-8e9f0a1b7e-o2p4q       1/1     Running 0           12h
+notification-service-9f0a1b2c8f-r3s5t  1/1     Running 0           6h
+```
 
 ### Значения статусов подов
 
